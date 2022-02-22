@@ -17,7 +17,7 @@
 
 
 // if (confirm("Согласие на всё")) {
-//   person = prompt ("Enter your name", "Anonimus") 
+//   person = prompt ("Enter your name", "Anonimus")
 // }
 
 // alert("Вы ввели " + person)
@@ -177,7 +177,7 @@
 
 // if (0) {
 //   console.log("Лож!");
-// } else if (" ") { 
+// } else if (" ") {
 //   console.log("Истина!");
 // }
 
@@ -260,7 +260,7 @@
 // } else {
 //   message = '';
 // }
-// или: 
+// или:
 
 // let message = (login == 'Сотрудник') ? 'Привет' :
 //   (login == 'Директор') ? 'Здравствуйте':
@@ -302,7 +302,7 @@
 // } else {
 //   alert("я тебя не знать");
 // }
-//   
+//
 // let go = -10000;
 // while (go < 0) {
 //   console.log (go);
@@ -317,7 +317,7 @@
 // const bobrovka = {
 // 	H,
 // 	L: 32,
-// 	D, 
+// 	D,
 // 	price: {
 // 		minPrice: 400,
 // 		maxPrice: 1000
