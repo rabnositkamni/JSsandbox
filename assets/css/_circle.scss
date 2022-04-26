@@ -1,0 +1,31 @@
+#circle {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid red;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 1;
+    // background-color: gray;
+}
+#backgroung-color {
+    height: 60%;
+    width: 100%;
+    background-color: gray;
+    z-index: 0;
+}
+
+#block-range {
+    position: absolute;
+    top: 46%;
+    transform: translateY(-50%);;
+    margin: 0 auto 0;
+    z-index: 1000;
+    transform: rotateZ(270deg);
+    width: 110%;
+}
