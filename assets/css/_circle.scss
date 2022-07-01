@@ -18,6 +18,7 @@
     width: 100%;
     background-color: gray;
     z-index: 0;
+    transition: 0.4s;
 }
 
 #block-range {
@@ -29,3 +30,4 @@
     transform: rotateZ(270deg);
     width: 110%;
 }
+

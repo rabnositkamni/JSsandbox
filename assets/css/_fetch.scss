@@ -1,0 +1,29 @@
+.wrap__fetch button {
+    width: auto;
+}
+.wrap__fetch {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.wrap__input--fetch {
+    display: flex;
+    input {
+        font-size: 16px;
+    }
+}
+#number__user_label {
+    width: 165px;
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+.git {
+    display: flex;
+    flex-direction: column;
+    #github-input {
+        width: fit-content;
+    }
+}

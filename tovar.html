@@ -109,117 +109,71 @@
 			</div>
 			<div id="display">0</div>
 		</div>
-
+<!-- загрузка -->
+		<div class="crescent"></div>
 <!-- круг -->
 		<div id="circle" >
 			<div id="backgroung-color"></div>
-			<input type="range" name="" id="block-range" min="0" max="100" value="60">
+			<input type="range" name="" id="block-range" min="0" max="20" value="12">
 		</div>
 
 
 
+<!-- счётчик -->
+		<div class="count__wrap">
+			<div class="count">
+				<button id="count-minus">-</button>
+				<h2 id="count_out">0</h2>
+				<button id="count-plus">+</button>
+			</div>
+			<button id="count-random">Random</button>
+		</div>
 
 
-		<div class="wedo">
-			<!-- <div class="main">
-			  <div class="slider slider-for">
-			    <img src="assets/images/bobrovka/1.jpg">
-			    <img class="img_2" src="assets/images/bobrovka/2.jpg">
-			    <img id="color_2"  src="assets/images/bobrovka/3.jpg">
-			    <img src="assets/images/bobrovka/4.jpg">
-			    <img src="assets/images/bobrovka/5.jpg">
-			    <img src="assets/images/bobrovka/6.jpg">
-			    <img src="assets/images/bobrovka/7.jpg">
-			    <img src="assets/images/bobrovka/8.jpg">
-			    <img src="assets/images/bobrovka/9.jpg">
-			    			    
-			  </div>
-			  <div class="slider slider-nav">
-			    <img class="slider_img" src="assets/images/bobrovka/1.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/2.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/3.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/4.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/5.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/6.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/7.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/8.jpg">
-			    <img class="slider_img" src="assets/images/bobrovka/9.jpg">
-			    
-			  </div>
-			</div> -->
+<!-- играем с промисами -->
+		<div class="wrap__fetch">
+			<div class="wrap__input--fetch">
+				<label id="number__user_label" for="number__user">Номер пользователя</label>
+				<input id="number__user" type="number" min="1" max="200" value="16">
+			</div>
+			<button class="send__fetch">Отправить запрос на сервер</button>
+			<div class="object">
+			</div>
 
+			<!-- Код делает переборку фотографий до 5000 фотки -->
+			<div>
+				<button class="get__photos">Перебрать 5000 фоток</button>
+				<img class="object-img" src="#" alt="">
+			</div>
+		</div>
 
-
-
-
-
-			<!-- <div class="wedo_item">
-				<div class="accordion">
-
-					<div class="accordion_item" data-collapse="#wedo_1">
-						<div class="accordion_header">
-							<img class="accordion_icon" src="assets/images/picture_2.png">
-							<div class="accordione_title">Зачем она нужна?</div>
-						</div>
-						<div class="accordion_content" id="wedo_1"> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						рассказатьь где как и зачем опименяется</p> </div>
-					</div>
-
-					<div class="accordion_item" data-collapse="#wedo_2">
-						<div class="accordion_header">
-							<img class="accordion_icon" src="assets/images/bullseye.png">
-							<div class="accordione_title">Описание</div>
-						</div>
-						<div class="accordion_content" id="wedo_2"> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						Описать из чего состоит сумка</p> </div>
-					</div>
-
-					<div class="accordion_item" data-collapse="#wedo_3">
-						<div class="accordion_header">
-							<img class="accordion_icon" src="assets/images/equalizer.png">
-							<div class="accordione_title">Характеристики</div>
-						</div>
-						<div class="accordion_content" id="wedo_3"> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						Здесь указать размеры сумки</p> 
-						</div>
-					</div>
-
-					<div class="accordion_item" data-collapse="#wedo_4">
-						<div class="accordion_header">
-							<img class="accordion_icon" src="assets/images/icons8.png">
-							<div class="accordione_title">цвет</div>
-						</div>
-						<div class="accordion_content" id="wedo_4">
-							<div class="color" id="color_1"></div>
-							<div class="color" id="color_2"></div>
-							<div class="color" id="color_3"></div>
-							<div class="color" id="color_4"></div>
-							<div class="color" id="color_5"></div>
-							<div class="color" id="color_6"></div>
-						</div>
-					</div>
-
-					<div class="price"> <p>950 грн</p> </div>
-
-				</div>
-			</div>			 -->
+		<div class="git">
+			<label for="github-input">Nickname github account</label>
+			<input type="text" name="github-input" id="github-input" value="mickey">
+			<div class="received__data--git"></div>
 		</div>
 	</div>
 </section>
-<section>
-	<h4>
-		Учим основы синтаксиса
-		<span class="yellow"></span>
-	</h4>
-	<h5>Lesson #2</h5>
-</section>
 
 
-	<li class="item">Item 1</li>
+
+
+
+
+
+
+
+
+
+
+
+<!-- //Добавление или удаление класса у одного элемента массива -->
+<!-- <ul id="#test_add_class">
+	<li class="item active">Item 1</li>
 	<li class="item">Item 2</li>
 	<li class="item">Item 3</li>
 	<li class="item">Item 4</li>
-
+</ul> -->
 
 
 
@@ -338,4 +292,3 @@
 
 </body>
 </html>
-	

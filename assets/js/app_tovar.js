@@ -532,6 +532,12 @@
 
 
 
+    //выдаёт координаты где именно кликнуто
+    // document.querySelector('body').addEventListener('click', (event) => {
+    //     console.log(event.clientX, event.clientY)
+    // })
+
+
 
 //КАЛЬКУЛЯТОР!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -559,15 +565,25 @@
 // }
 //что тоо делаю явно не так. не знаю как переключить ввод во второй операнд
 
-
-// калькулятор на минималках:
+//скрыть/показать калькулятор
+let hideButtonShow = 0;
 document.querySelector('#show-calc').onclick = () => {
+//скрыть/показать калькулятор, скрываем вообще всё, когда калькулятор дважды скрывали и показывали, с уведомлением "доигрался"
+    hideButtonShow += 1;
+    if (hideButtonShow == 3) {
+        document.querySelector('#show-calc').hidden = true;
+        document.querySelector('#show-calc').nextSibling.hidden = true;
+        alert('Доклацался');
+    }
+
     if (document.querySelector('#show-calc').checked) {
         document.querySelector('.calc').hidden = false;
     } else {
         document.querySelector('.calc').hidden = true;
     }
 }
+
+//сам калькулятор на минималках:
 
 function operand_1 () {
     i = document.getElementById('operand_1').value;
@@ -620,19 +636,265 @@ function multiply (a, b) {
 
 
 
-//Крутилка с выбором цвета у круга
-// шаг 1 сделать круг, при кручении ползунка меняется заполненость круга
+//Крутилка с выбором заполнености у круга
 
+    // блокировка прокрутки при наведении на элемент
+    document.querySelector('#circle').addEventListener('mouseover', () => {
+        document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = 17+'px';
+    })
+    document.querySelector('#circle').addEventListener('mouseout', () => {
+        document.body.style.overflow = "visible";
+        document.body.style.paddingRight = 0;
+    })
 
-document.querySelector('#block-range').oninput = heightBackground;
+    let range = +document.querySelector('#block-range').value
+    // обработка ползунка изменением инпута
+    document.querySelector('#block-range').addEventListener('input', heightBackgroundInput)
 
+    // обработка ползунка прокруткой колёсика мыши
+    document.querySelector('#circle').addEventListener('wheel', heightBackgroundWheel)
 
-function heightBackground(range) {
-    range = document.querySelector('#block-range').value
-    let array = document.getElementById('backgroung-color').style.height
-    let height = array[0] + array[1]
-    if (height != range) {
-        document.getElementById('backgroung-color').style.height = range+'%';
-        console.log(range)
+    function heightBackgroundWheel(e) {
+        if (e.deltaY > 0 && range > 0) {
+            range -= 1;
+        } if (e.deltaY < 0 && range < 20) {
+            range += 1;
+        }
+        document.querySelector('#block-range').value = range
+        heightBackground()
     }
+
+    function heightBackgroundInput() {
+        range = document.getElementById('block-range').value
+        heightBackground()
+    }
+
+    function heightBackground() {
+        let oldHeight = document.getElementById('backgroung-color').style.height
+        if (oldHeight.length = 3) {
+            oldHeight = Number(oldHeight[0] + oldHeight[1])
+        } else {
+            oldHeight = Number(oldHeight[0])
+        }
+        if (oldHeight != range) {
+            document.getElementById('backgroung-color').style.height = (range * 5)+'%';
+            range = +range
+        }
+        console.log(`Заполненность круга ${(range * 5)}%`)
+    }
+// конец работы с кругом и его обработками
+
+
+
+
+
+//счётчик
+let count = document.querySelector('#count_out')
+
+count.value = 0;
+function random(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.ceil(Math.random() * (max - min)) + min
+}
+count.textContent = count.value
+
+document.querySelector('#count-plus').addEventListener('click', countPlus)
+function countPlus () {
+    count.value += 1;
+    count.textContent = count.value
+}
+
+document.querySelector('#count-minus').addEventListener('click', countMinus)
+function countMinus () {
+    count.value -= 1;
+    count.textContent = count.value
+}
+document.querySelector('#count-random').addEventListener('click', () => {
+    count.value = random(1, 100);
+    count.textContent = count.value
+})
+// Конец счётчика
+
+
+
+//играем с промисами
+
+document.querySelector('.send__fetch').addEventListener('click', fetchRequest)
+document.querySelector('#number__user').addEventListener('input', numberChangeUser)
+//обработка инпута при нажатии Enter
+document.querySelector('#number__user').addEventListener('keydown', (e) =>{
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+        fetchRequest();
+    }
+})
+
+let numberUser = document.querySelector('#number__user').value
+function numberUserLabelOver() {
+    document.querySelector('#number__user_label').innerText = 'Номер пользователя не может быть меньше 1 или больше 200';
+}
+
+//Если значение меньше или больше  0 - 200
+function numberChangeUser(thisValue) {
+    thisValue = document.querySelector('#number__user').value
+    if (thisValue <= 200 && thisValue > 0) {
+        numberUser = document.querySelector('#number__user').value
+        console.log(numberUser)
+    }
+    if ( thisValue < 0 ) {
+        numberUserLabelOver();
+        numberUser = 1;
+        document.querySelector('#number__user').value = 1
+    }
+    if ( thisValue > 200 ) {
+        numberUserLabelOver();
+        numberUser = 200;
+        document.querySelector('#number__user').value = 200
+    }
+}
+//Обработка самого запроса и вывод в Front
+function fetchRequest() {
+    fetch(`https://jsonplaceholder.typicode.com/todos/${numberUser}`)
+    // fetch(`https://jsonplaceholder.typicode.com/posts/45`)
+        .then(response => response.json()) // преобразование строки с данными в объект, возвращает промис
+        .then(json => {
+            console.log(json) // вывод в консоль поолученного объекта
+
+            let entries = Object.entries(json) // из нашего объекта делаем массив с данными формата "ключ, значение". Эдакий массив с массивами в котором в каждом массиве массив с двумя элементами: ключём и значением
+            console.log(entries) // смотрим на наш массив с массивами
+
+            document.querySelector('.object').innerHTML = ''; //очищаем поле с данными(если они были)
+
+            entries.forEach((element) => { // перебираем массив. Внутри каждого массива:
+                console.log(element)
+                let key = element[0]; // берём первое значение массива и обзываем его "ключ"
+                let value = element[1]; // берём второе значение массива и обзываем его "значение"
+                document.querySelector('.object').innerHTML += `<div>${key}: ${value}</div>`; // записываем данные в поле
+            })
+        })
+}
+
+
+
+
+
+
+//Код делает переборку фотографий до 5000 фотки
+let numberPhoto = 1;
+let receivedData
+document.querySelector('.get__photos').addEventListener('click', () => {
+    stopSorting ();
+    fetchRequestPhotos();
+})
+
+// Делаем паузу переименование при переборке
+function stopSorting (button) {
+    button = document.querySelector('.get__photos');
+    button.classList.toggle('sorting')
+    if (button.classList.contains('sorting')) {
+        button.textContent = 'Остановить переборку'
+    } else {
+        button.textContent = 'Продолжить переборку'
+    }
+}
+
+//Делает саму переборку
+function fetchRequestPhotos(){
+    if (document.querySelector('.get__photos').classList.contains('sorting')) {
+        fetch(`https://jsonplaceholder.typicode.com/photos/${numberPhoto}`)
+        .then(response => response.json())
+        .then(json => {
+            receivedData = json
+            console.log(receivedData)
+            document.querySelector('.object-img').src = receivedData.url
+            if (numberPhoto < 5000) {
+                numberPhoto += 1;
+                console.log(numberPhoto)
+                fetchRequestPhotos()
+            } else {
+                console.log("Финиш все фотки перебраны")
+                return;
+            }
+        })
+        .catch(error => console.log(error))
+    }
+}
+
+
+
+
+//Добавление или удаление класса у одного элемента массива
+// let items = document.querySelectorAll('.item')
+// items.forEach (element => {
+//     element.addEventListener('click', toggleClassActive)
+// })
+// function toggleClassActive() {
+//     items.forEach (element => {
+//         if (element.classList.contains('active')) {
+//             element.classList.remove('active');
+//         }
+//     })
+//     this.classList.add('active')
+// }
+// Конец Добавление или удаление класса у одного элемента массива
+
+
+
+
+//github API test
+
+let inputNickname = '';
+let sentNickname; // нужен для сравнения введённого имени и уже отправленного, что бы не засыпать одинаковыми запросами
+let inputArea = document.querySelector('#github-input')
+let userInfo;
+let userInfoObject;
+
+inputArea.addEventListener('input', renameNickname)
+
+function sendRequest() {
+    if (inputNickname !== '') {
+        fetch(`https://api.github.com/search/users?q=${inputNickname}`)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json.items[0])
+            userInfoObject = json.items[0];
+            toHTML();
+        })
+        .catch(error => console.log(`Error: ${error.message}`))
+    }
+    else {
+        console.log('request is empty')
+    }
+}
+
+function renameNickname () {
+    inputNickname = inputArea.value;
+    setTimeout(() => {
+        if (sentNickname !== inputNickname) {
+            sendRequest();
+            sentNickname = inputNickname;
+        }
+    }, 1000);
+}
+
+function toHTML () {
+    let key;
+    let value;
+    document.querySelector('.received__data--git').innerHTML = '';
+
+    userInfo = Object.entries(userInfoObject);
+    userInfo.forEach(element => {
+        key = element[0];
+        value = element[1];
+
+        if (value[0] == 'h' && key !== 'avatar_url') {
+            value = `<a href="${value}">${value}</a>`
+        }
+        if (key == 'avatar_url') {
+            value = `<img src="${value}" alt="${key}">`
+        }
+
+        document.querySelector('.received__data--git').innerHTML += `<div>${key}: ${value}</div>`;
+    })
 }
